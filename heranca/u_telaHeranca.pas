@@ -44,7 +44,6 @@ type
     procedure grd_listagemDblClick(Sender: TObject);
   private
     { Private declarations }
-    sysStatus: TEnum;
     procedure ControlarBotoes(flag: boolean);
     function retornarCampoTraduzido(campo:string):string;
     procedure exibirLabelIndice(campo: string; alabel: TLabel);
@@ -53,6 +52,7 @@ type
     procedure limpaEdits;
   public
     { Public declarations }
+    sysStatus: TEnum;
     indiceAtual: string;
     function excluir:Boolean; virtual;
     function gravar(EstadoCadastro:TEnum):Boolean; virtual;
@@ -254,6 +254,10 @@ begin
   begin
     self.ControlarBotoes(true);
     sysStatus := te_nenhum;
+  end
+  else
+  begin
+    ShowMessage('Erro na Gravação');
   end;
 end;
 {$endregion}

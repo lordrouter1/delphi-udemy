@@ -21,6 +21,10 @@ inherited frm_cad_categoria: Tfrm_cad_categoria
       end
     end
     inherited tbs_manutencao: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 823
+      ExplicitHeight = 448
       object edt_codigo: TLabeledEdit
         Tag = 2
         Left = 4
