@@ -231,6 +231,7 @@ begin
   begin
     self.ControlarBotoes(True);
     sysStatus := te_nenhum;
+    qry_listagem.Refresh;
   end;
 end;
 
@@ -254,6 +255,7 @@ begin
   begin
     self.ControlarBotoes(true);
     sysStatus := te_nenhum;
+    qry_listagem.Refresh;
   end
   else
   begin
