@@ -1,0 +1,9 @@
+unit u_enum;
+
+interface
+
+type TEnum
+
+implementation
+
+end.

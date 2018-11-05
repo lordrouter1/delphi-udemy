@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/10/17 14:21:59.000.919,=C:\Users\suporte\Documents\Embarcadero\Studio\Projects\AppletModule1.pas</Transaction>
+    <Transaction>2018/10/22 09:55:16.000.822,=C:\Users\suporte\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/10/22 09:56:47.000.852,C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\u_main.pas=C:\Users\suporte\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/10/22 09:56:47.000.852,C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\u_main.dfm=C:\Users\suporte\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2018/10/22 09:57:05.000.907,C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\vendas.dproj=C:\Users\suporte\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2018/10/22 10:44:23.000.197,=C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\dataModule\u_dtm_conexao.pas</Transaction>
+    <Transaction>2018/10/22 11:06:34.000.285,=C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\Unit1.pas</Transaction>
+    <Transaction>2018/10/22 11:07:13.000.099,C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\Unit1.dfm=C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\heranca\u_telaHeranca.dfm</Transaction>
+    <Transaction>2018/10/22 11:07:13.000.099,C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\Unit1.pas=C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\heranca\u_telaHeranca.pas</Transaction>
+    <Transaction>2018/10/22 13:56:57.000.539,=C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\Unit1.pas</Transaction>
+    <Transaction>2018/10/22 13:58:05.000.383,C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\Unit1.dfm=C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\cadastro\u_cad_categoria.dfm</Transaction>
+    <Transaction>2018/10/22 13:58:05.000.383,C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\Unit1.pas=C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\cadastro\u_cad_categoria.pas</Transaction>
+    <Transaction>2018/10/22 16:17:59.000.720,=C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\Unit1.pas</Transaction>
+    <Transaction>2018/10/22 16:18:39.000.110,C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\Unit1.pas=C:\Users\suporte\Documents\delphi\projetos\projetoUdemy\u_enum.pas</Transaction>
+  </Transactions>
+</BorlandProject>

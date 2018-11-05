@@ -1,0 +1,10 @@
+unit u_enum;
+
+interface
+
+type
+  TEnum = (te_inserir,te_alterar,te_nenhum);
+
+implementation
+
+end.

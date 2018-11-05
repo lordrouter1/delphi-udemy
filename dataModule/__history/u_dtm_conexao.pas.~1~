@@ -1,0 +1,25 @@
+unit u_dtm_conexao;
+
+interface
+
+uses
+  System.SysUtils, System.Classes;
+
+type
+  Tdtm_conexao = class(TDataModule)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dtm_conexao: Tdtm_conexao;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

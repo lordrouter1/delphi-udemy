@@ -1,0 +1,237 @@
+unit u_telaHeranca;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.DBCtrls, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Vcl.ComCtrls, Vcl.ExtCtrls,
+  u_dtm_conexao,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, u_enum, Vcl.Menus;
+
+type
+  Tfrm_telaHeranca = class(TForm)
+    pgc_principal: TPageControl;
+    pnl_rodape: TPanel;
+    tbs_listagem: TTabSheet;
+    tbs_manutencao: TTabSheet;
+    pnl_topo: TPanel;
+    grd_listagem: TDBGrid;
+    btn_novo: TBitBtn;
+    btn_alterar: TBitBtn;
+    btn_cancelar: TBitBtn;
+    btn_gravar: TBitBtn;
+    btn_apagar: TBitBtn;
+    btn_fechar: TBitBtn;
+    btn_navigation: TDBNavigator;
+    qry_listagem: TZQuery;
+    bit: TDataSource;
+    msk_pesquisa: TMaskEdit;
+    btn_pesquisa: TBitBtn;
+    lbl_indice: TLabel;
+    procedure btn_fecharClick(Sender: TObject);
+    procedure btn_novoClick(Sender: TObject);
+    procedure btn_alterarClick(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+    procedure btn_gravarClick(Sender: TObject);
+    procedure btn_apagarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure grd_listagemTitleClick(Column: TColumn);
+    procedure FormCreate(Sender: TObject);
+    procedure msk_pesquisaChange(Sender: TObject);
+  private
+    { Private declarations }
+    sysStatus: TEnum;
+    procedure ControlarBotoes(flag: boolean);
+    function retornarCampoTraduzido(campo:string):string;
+    procedure exibirLabelIndice(campo: string; alabel: TLabel);
+    function existeCampoObrigratorio: Boolean;
+    procedure desabilitaEditPk;
+  public
+    { Public declarations }
+    indiceAtual: string;
+    function excluir:Boolean; virtual;
+    function gravar(EstadoCadastro:TEnum):Boolean; virtual;
+  end;
+
+var
+  frm_telaHeranca: Tfrm_telaHeranca;
+
+implementation
+
+{$R *.dfm}
+
+{$region 'PROCEDURES E FUNCTIONS'}
+procedure Tfrm_telaHeranca.ControlarBotoes(flag: boolean);
+begin
+  self.btn_novo.Enabled := flag;
+  self.btn_alterar.Enabled := flag;
+  self.btn_apagar.Enabled := flag;
+  self.btn_navigation.Enabled := flag;
+  self.pgc_principal.Pages[0].TabVisible := flag;
+  self.btn_cancelar.Enabled := not(flag);
+  self.btn_gravar.Enabled := not(flag);
+
+  if flag then
+    self.pgc_principal.TabIndex := 0;
+end;
+
+function Tfrm_telaHeranca.retornarCampoTraduzido(campo:string):string;
+var
+  i: integer;
+begin
+  for i := 0 to qry_listagem.Fields.Count-1 do
+  begin
+      if lowercase(qry_listagem.Fields[i].FieldName) = lowercase(campo) then
+      begin
+        Result := qry_listagem.Fields[i].DisplayLabel;
+        break;
+      end;
+  end;
+
+end;
+
+function Tfrm_telaHeranca.existeCampoObrigratorio:Boolean;
+var
+  i : integer;
+begin
+  Result := False;
+  for i := 0 to ComponentCount -1 do
+  begin
+    if (Components[i] is TLabeledEdit) then
+    begin
+      if (TLabeledEdit(Components[i]).Tag = 1) and (TLabeledEdit(Components[i]).Text = '') then
+      begin
+        MessageDlg(TLabeledEdit(Components[i]).EditLabel.Caption + ' é um campo obrigratorio!',mtInformation,[mbOK],0);
+        TLabeledEdit(Components[i]).SetFocus;
+        Result := true;
+        break;
+      end;
+    end;
+  end;
+end;
+
+procedure Tfrm_telaHeranca.desabilitaEditPk;
+var
+  i : integer;
+begin
+  for i := 0 to ComponentCount -1 do
+  begin
+    if (Components[i] is TLabeledEdit) then
+    begin
+      if (TLabeledEdit(Components[i]).Tag = 2)then
+      begin
+        TLabeledEdit(Components[i]).Enabled := false;
+        break;
+      end;
+    end;
+  end;
+end;
+{$endregion}
+
+{$region 'METODOS VIRTUAIS'}
+function Tfrm_telaHeranca.excluir: Boolean;
+begin
+  ShowMessage('Deletado');
+  Result := True;
+end;
+
+function Tfrm_telaHeranca.gravar(EstadoCadastro: TEnum): Boolean;
+begin
+  if (EstadoCadastro = te_inserir) then
+    ShowMessage('inserir')
+  else if(EstadoCadastro = te_alterar) then
+    ShowMessage('alterar');
+  Result := True;
+end;
+{$endregion}
+
+{$region 'PROCEDURE DO SISTEMA'}
+procedure Tfrm_telaHeranca.btn_novoClick(Sender: TObject);
+begin
+  self.ControlarBotoes(false);
+  sysStatus := te_inserir;
+end;
+
+procedure Tfrm_telaHeranca.exibirLabelIndice(campo:string; alabel:TLabel);
+begin
+  alabel.Caption := retornarCampoTraduzido(campo);
+end;
+
+procedure Tfrm_telaHeranca.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  qry_listagem.Close;
+end;
+
+procedure Tfrm_telaHeranca.FormCreate(Sender: TObject);
+begin
+  indiceAtual:='id';
+end;
+
+procedure Tfrm_telaHeranca.FormShow(Sender: TObject);
+begin
+  msk_pesquisa.SetFocus;
+  self.ControlarBotoes(true);
+  if (qry_listagem.SQL.Text <> '') then
+  begin
+    qry_listagem.IndexFieldNames := indiceAtual;
+    exibirLabelIndice(indiceAtual,lbl_indice);
+    qry_listagem.Open;
+  end;
+
+end;
+
+procedure Tfrm_telaHeranca.grd_listagemTitleClick(Column: TColumn);
+begin
+  indiceAtual := column.FieldName;
+  qry_listagem.IndexFieldNames := indiceAtual;
+  exibirLabelIndice(indiceAtual,lbl_indice);
+end;
+
+procedure Tfrm_telaHeranca.msk_pesquisaChange(Sender: TObject);
+begin
+  qry_listagem.Locate(indiceAtual, TMaskEdit(Sender).Text, [loPartialKey]);
+end;
+
+procedure Tfrm_telaHeranca.btn_alterarClick(Sender: TObject);
+begin
+  self.ControlarBotoes(false);
+  sysStatus := te_alterar;
+end;
+
+procedure Tfrm_telaHeranca.btn_apagarClick(Sender: TObject);
+begin
+  if excluir then
+  begin
+    self.ControlarBotoes(True);
+    sysStatus := te_nenhum;
+  end;
+end;
+
+procedure Tfrm_telaHeranca.btn_cancelarClick(Sender: TObject);
+begin
+  self.ControlarBotoes(true);
+  sysStatus := te_nenhum;
+end;
+
+procedure Tfrm_telaHeranca.btn_fecharClick(Sender: TObject);
+begin
+  close;
+end;
+
+procedure Tfrm_telaHeranca.btn_gravarClick(Sender: TObject);
+begin
+  if (existeCampoObrigratorio) then
+    abort;
+
+  if gravar(sysStatus) then
+  begin
+    self.ControlarBotoes(true);
+    sysStatus := te_nenhum;
+  end;
+end;
+{$endregion}
+
+end.
