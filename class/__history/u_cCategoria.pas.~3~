@@ -1,0 +1,9 @@
+unit u_cCategoria;
+
+interface
+
+uses System.Classes, Vcl.Controls, Vcl.ExtCtrls, Vcl.Dialogs;
+
+implementation
+
+end.

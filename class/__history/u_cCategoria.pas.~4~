@@ -19,12 +19,12 @@ implementation
 
 constructor TCategoria.Create;
 begin
-  ShowMessage('Criado!');
+
 end;
 
 destructor TCategoria.Destroy;
 begin
-  ShowMessage('Destruido!');
+
   inherited;
 end;
 

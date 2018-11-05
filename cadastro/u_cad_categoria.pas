@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, u_telaHeranca, Data.DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, Vcl.StdCtrls, Vcl.Mask,
   Vcl.DBCtrls, Vcl.Buttons, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.ComCtrls,
-  Vcl.Menus;
+  Vcl.Menus, u_cCategoria;
 
 type
   Tfrm_cad_categoria = class(Tfrm_telaHeranca)
@@ -18,6 +18,7 @@ type
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
+    oCategoria: TCategoria;
   public
     { Public declarations }
   end;
@@ -31,6 +32,7 @@ implementation
 procedure Tfrm_cad_categoria.FormCreate(Sender: TObject);
 begin
   inherited;
+  oCategoria := TCategoria.Create;
   indiceAtual:='descricao';
 end;
 

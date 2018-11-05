@@ -22,6 +22,7 @@ inherited frm_cad_categoria: Tfrm_cad_categoria
     end
     inherited tbs_manutencao: TTabSheet
       object edt_codigo: TLabeledEdit
+        Tag = 2
         Left = 4
         Top = 31
         Width = 121
@@ -34,6 +35,7 @@ inherited frm_cad_categoria: Tfrm_cad_categoria
         TabOrder = 0
       end
       object edt_descricao: TLabeledEdit
+        Tag = 1
         Left = 4
         Top = 88
         Width = 399
