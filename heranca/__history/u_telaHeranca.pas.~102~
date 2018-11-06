@@ -41,16 +41,18 @@ type
     procedure grd_listagemTitleClick(Column: TColumn);
     procedure FormCreate(Sender: TObject);
     procedure msk_pesquisaChange(Sender: TObject);
+    procedure grd_listagemDblClick(Sender: TObject);
   private
     { Private declarations }
-    sysStatus: TEnum;
     procedure ControlarBotoes(flag: boolean);
     function retornarCampoTraduzido(campo:string):string;
     procedure exibirLabelIndice(campo: string; alabel: TLabel);
     function existeCampoObrigratorio: Boolean;
     procedure desabilitaEditPk;
+    procedure limpaEdits;
   public
     { Public declarations }
+    sysStatus: TEnum;
     indiceAtual: string;
     function excluir:Boolean; virtual;
     function gravar(EstadoCadastro:TEnum):Boolean; virtual;
@@ -71,6 +73,7 @@ begin
   self.btn_apagar.Enabled := flag;
   self.btn_navigation.Enabled := flag;
   self.pgc_principal.Pages[0].TabVisible := flag;
+  self.pgc_principal.Pages[1].TabVisible := not(flag);
   self.btn_cancelar.Enabled := not(flag);
   self.btn_gravar.Enabled := not(flag);
 
@@ -124,7 +127,20 @@ begin
       if (TLabeledEdit(Components[i]).Tag = 2)then
       begin
         TLabeledEdit(Components[i]).Enabled := false;
+        break;
       end;
+    end;
+  end;
+end;
+
+procedure Tfrm_telaHeranca.limpaEdits;
+var
+  i: integer;
+begin
+  for i := 0 to ComponentCount -1 do
+  begin
+    if (Components[i] is TLabeledEdit) then begin
+      TLabeledEdit(Components[i]).Text := '';
     end;
   end;
 end;
@@ -151,6 +167,7 @@ end;
 procedure Tfrm_telaHeranca.btn_novoClick(Sender: TObject);
 begin
   self.ControlarBotoes(false);
+  limpaEdits;
   sysStatus := te_inserir;
 end;
 
@@ -174,6 +191,7 @@ procedure Tfrm_telaHeranca.FormShow(Sender: TObject);
 begin
   msk_pesquisa.SetFocus;
   self.ControlarBotoes(true);
+  desabilitaEditPk;
   if (qry_listagem.SQL.Text <> '') then
   begin
     qry_listagem.IndexFieldNames := indiceAtual;
@@ -181,6 +199,11 @@ begin
     qry_listagem.Open;
   end;
 
+end;
+
+procedure Tfrm_telaHeranca.grd_listagemDblClick(Sender: TObject);
+begin
+  btn_alterar.Click;
 end;
 
 procedure Tfrm_telaHeranca.grd_listagemTitleClick(Column: TColumn);
@@ -198,6 +221,7 @@ end;
 procedure Tfrm_telaHeranca.btn_alterarClick(Sender: TObject);
 begin
   self.ControlarBotoes(false);
+  limpaEdits;
   sysStatus := te_alterar;
 end;
 
@@ -207,6 +231,7 @@ begin
   begin
     self.ControlarBotoes(True);
     sysStatus := te_nenhum;
+    qry_listagem.Refresh;
   end;
 end;
 
@@ -230,6 +255,11 @@ begin
   begin
     self.ControlarBotoes(true);
     sysStatus := te_nenhum;
+    qry_listagem.Refresh;
+  end
+  else
+  begin
+    ShowMessage('Erro na Gravação');
   end;
 end;
 {$endregion}

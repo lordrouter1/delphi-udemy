@@ -83,10 +83,6 @@ object frm_telaHeranca: Tfrm_telaHeranca
     object tbs_manutencao: TTabSheet
       Caption = 'Manuten'#231#227'o'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 22
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
   end
   object pnl_rodape: TPanel
