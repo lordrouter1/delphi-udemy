@@ -17,6 +17,7 @@ type
     edt_descricao: TLabeledEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn_alterarClick(Sender: TObject);
   private
     { Private declarations }
     oCategoria: TCategoria;
@@ -35,6 +36,21 @@ implementation
 {$R *.dfm}
 
 {$REGION 'OVERRIDE'}
+procedure Tfrm_cad_categoria.btn_alterarClick(Sender: TObject);
+begin
+  inherited;
+  if oCategoria.selecionar(qry_listagem.FieldByName('id').AsInteger) then
+  begin
+    edt_codigo.Text := IntToStr(oCategoria.codigo);
+    edt_descricao.Text := oCategoria.descricao;
+  end
+  else
+  begin
+    btn_cancelar.Click;
+    abort;
+  end;
+end;
+
 function Tfrm_cad_categoria.excluir: Boolean;
 begin
   result := oCategoria.apagar;

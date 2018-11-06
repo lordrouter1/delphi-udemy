@@ -82,10 +82,10 @@ begin
     try
       qry.Open;
 
-      self.f_id = id;
-      self.f_descricao = qry.FieldByName('descricao').AsString;
+      self.f_id := id;
+      self.f_descricao := qry.FieldByName('descricao').AsString;
     except
-      result:= false;
+      result := false;
     end;
   finally
     if(Assigned(qry)) then

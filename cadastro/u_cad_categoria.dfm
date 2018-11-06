@@ -3,6 +3,7 @@ inherited frm_cad_categoria: Tfrm_cad_categoria
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgc_principal: TPageControl
+    ActivePage = tbs_manutencao
     inherited tbs_listagem: TTabSheet
       inherited grd_listagem: TDBGrid
         Columns = <
@@ -58,6 +59,7 @@ inherited frm_cad_categoria: Tfrm_cad_categoria
     end
   end
   inherited qry_listagem: TZQuery
+    Active = True
     SQL.Strings = (
       'select * from categoriaid')
     object qry_listagemdescricao: TWideStringField

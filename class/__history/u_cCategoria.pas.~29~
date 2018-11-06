@@ -3,7 +3,8 @@ unit u_cCategoria;
 interface
 
 uses System.Classes, Vcl.Controls, Vcl.ExtCtrls, Vcl.Dialogs, u_dtm_conexao,
-     ZAbstractConnection, ZConnection;
+     ZAbstractConnection, ZConnection,ZAbstractRODataset, ZAbstractDataset,
+     ZDataset, system.SysUtils;
 
 type
   TCategoria = class
@@ -21,7 +22,7 @@ type
       function inserir:Boolean;
       function atualizar:Boolean;
       function apagar:Boolean;
-      function selecionar:Boolean;
+      function selecionar(id: integer):Boolean;
   published
       property codigo: integer read getCodigo write setCodigo;
       property descricao: string read getDescricao write setDescricao;
@@ -47,18 +48,49 @@ end;
 
 function TCategoria.inserir: Boolean;
 var
-  qry_inserir:TZQuery
+  qry:TZQuery;
 begin
   try
-
+    result:= true;
+    qry := TZQuery.Create(nil);
+    qry.Connection := conexaoDb;
+    qry.SQL.Clear;
+    qry.SQL.Add('insert into categoriaid(descricao) values(:descricao);');
+    qry.ParamByName('descricao').Value := self.f_descricao;
+    try
+      qry.ExecSQL;
+    except
+      result:= false;
+    end;
   finally
-
+    if(Assigned(qry)) then
+      FreeAndNil(qry);
   end;
 end;
 
-function TCategoria.selecionar: Boolean;
+function TCategoria.selecionar(id: integer): Boolean;
+var
+  qry:TZQuery;
 begin
-  result := true;
+  try
+    result:= true;
+    qry := TZQuery.Create(nil);
+    qry.Connection := conexaoDb;
+    qry.SQL.Clear;
+    qry.SQL.Add('select descricao from categoriaid where id = :id;');
+    qry.ParamByName('id').Value := id;
+    try
+      qry.Open;
+
+      self.f_id = id;
+      self.f_descricao = qry.FieldByName('descricao').AsString;
+    except
+      result:= false;
+    end;
+  finally
+    if(Assigned(qry)) then
+      FreeAndNil(qry);
+  end;
 end;
 {$ENDREGION}
 
