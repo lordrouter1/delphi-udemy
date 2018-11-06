@@ -21,8 +21,8 @@ type
       destructor Destroy; override;
       function inserir:Boolean;
       function atualizar:Boolean;
-      function apagar:Boolean;
-      function selecionar:Boolean;
+      function apagar(id: integer):Boolean;
+      function selecionar(id: integer):Boolean;
   published
       property codigo: integer read getCodigo write setCodigo;
       property descricao: string read getDescricao write setDescricao;
@@ -41,36 +41,74 @@ begin
 end;
 
 function TCategoria.atualizar: Boolean;
+var
+  qry:TZQuery;
 begin
-  ShowMessage('Atualizado');
-  result := true;
+  try
+    result:= true;
+    qry := TZQuery.Create(nil);
+    qry.Connection := conexaoDb;
+    qry.SQL.Clear;
+    qry.SQL.Add('update categoriaid set descricao=:descricao where id=:id');
+    qry.ParamByName('id').Value := self.f_id;
+    qry.ParamByName('descricao').Value := self.f_descricao;
+
+    try
+      qry.ExecSQL;
+    except
+      result := false;
+    end;
+  finally
+    if(Assigned(qry)) then
+      FreeAndNil(qry);
+  end;
 end;
 
 function TCategoria.inserir: Boolean;
 var
-  qry_inserir:TZQuery;
+  qry:TZQuery;
 begin
   try
     result:= true;
-    qry_inserir := TZQuery.Create(nil);
-    qry_inserir.Connection := conexaoDb;
-    qry_inserir.SQL.Clear;
-    qry_inserir.SQL.Add('insert into categoriaid(descricao) values(:descricao);');
-    qry_inserir.ParamByName('descricao').Value := self.f_descricao;
+    qry := TZQuery.Create(nil);
+    qry.Connection := conexaoDb;
+    qry.SQL.Clear;
+    qry.SQL.Add('insert into categoriaid(descricao) values(:descricao);');
+    qry.ParamByName('descricao').Value := self.f_descricao;
     try
-      qry_inserir.ExecSQL;
+      qry.ExecSQL;
     except
       result:= false;
     end;
   finally
-    if(Assigned(qry_inserir)) then
-      FreeAndNil(qry_inserir);
+    if(Assigned(qry)) then
+      FreeAndNil(qry);
   end;
 end;
 
-function TCategoria.selecionar: Boolean;
+function TCategoria.selecionar(id: integer): Boolean;
+var
+  qry:TZQuery;
 begin
-  result := true;
+  try
+    result:= true;
+    qry := TZQuery.Create(nil);
+    qry.Connection := conexaoDb;
+    qry.SQL.Clear;
+    qry.SQL.Add('select descricao from categoriaid where id = :id;');
+    qry.ParamByName('id').Value := id;
+    try
+      qry.Open;
+
+      self.f_id := id;
+      self.f_descricao := qry.FieldByName('descricao').AsString;
+    except
+      result := false;
+    end;
+  finally
+    if(Assigned(qry)) then
+      FreeAndNil(qry);
+  end;
 end;
 {$ENDREGION}
 

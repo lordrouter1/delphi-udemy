@@ -53,7 +53,7 @@ end;
 
 function Tfrm_cad_categoria.excluir: Boolean;
 begin
-  result := oCategoria.apagar;
+  result := oCategoria.apagar();
 end;
 
 function Tfrm_cad_categoria.gravar(EstadoCadastro: TEnum): Boolean;
