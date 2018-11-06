@@ -53,7 +53,7 @@ end;
 
 function Tfrm_cad_categoria.excluir: Boolean;
 begin
-  result := oCategoria.apagar();
+  result := oCategoria.apagar(qry_listagem.FieldByName('id').AsInteger,qry_listagem.FieldByName('descricao').AsString);
 end;
 
 function Tfrm_cad_categoria.gravar(EstadoCadastro: TEnum): Boolean;

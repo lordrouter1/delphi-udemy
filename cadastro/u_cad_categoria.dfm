@@ -1,9 +1,9 @@
 inherited frm_cad_categoria: Tfrm_cad_categoria
   Caption = 'Cadastro de Categoria'
+  ExplicitTop = 8
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgc_principal: TPageControl
-    ActivePage = tbs_manutencao
     inherited tbs_listagem: TTabSheet
       inherited grd_listagem: TDBGrid
         Columns = <
@@ -22,10 +22,6 @@ inherited frm_cad_categoria: Tfrm_cad_categoria
       end
     end
     inherited tbs_manutencao: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
-      ExplicitWidth = 823
-      ExplicitHeight = 448
       object edt_codigo: TLabeledEdit
         Tag = 2
         Left = 4
@@ -59,7 +55,6 @@ inherited frm_cad_categoria: Tfrm_cad_categoria
     end
   end
   inherited qry_listagem: TZQuery
-    Active = True
     SQL.Strings = (
       'select * from categoriaid')
     object qry_listagemdescricao: TWideStringField

@@ -21,7 +21,7 @@ type
       destructor Destroy; override;
       function inserir:Boolean;
       function atualizar:Boolean;
-      function apagar(id: integer):Boolean;
+      function apagar(id: integer;descricao: string):Boolean;
       function selecionar(id: integer):Boolean;
   published
       property codigo: integer read getCodigo write setCodigo;
@@ -34,12 +34,32 @@ implementation
 { TCategoria }
 
 {$REGION 'CRUD'}
-function TCategoria.apagar(id: integer): Boolean;
+function TCategoria.apagar(id: integer;descricao: string): Boolean;
+var
+  qry:TZQuery;
 begin
-  if MessageDlg('Apagar registro: '+IntToStr(self.f_id)+#13+'Descrição: '+self.f_descricao,mtConfirmation,[mbYes,mbNo],0) = mrNo then
+  if MessageDlg('Apagar registro: '+IntToStr(id)+#13+'Descrição: '+descricao,mtConfirmation,[mbYes,mbNo],0) = mrNo then
   begin
-    Result := false;
+    result := false;
     abort;
+  end;
+
+  try
+    result:= true;
+    qry := TZQuery.Create(nil);
+    qry.Connection := conexaoDb;
+    qry.SQL.Clear;
+    qry.SQL.Add('delete from categoriaid where id=:id');
+    qry.ParamByName('id').Value := id;
+
+    try
+      qry.ExecSQL;
+    except
+      result := false;
+    end;
+  finally
+    if(Assigned(qry)) then
+      FreeAndNil(qry);
   end;
 
 end;
