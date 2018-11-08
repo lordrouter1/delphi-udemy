@@ -150,6 +150,7 @@ end;
 {$ENDREGION}
 
 {$REGION 'GET AND SET'}
+// GET
 function TCategoria.getCodigo: integer;
 begin
  result := self.f_id;
@@ -160,6 +161,7 @@ begin
   result := self.f_descricao;
 end;
 
+// SET
 procedure TCategoria.setCodigo(const Value: integer);
 begin
   self.f_id := value;

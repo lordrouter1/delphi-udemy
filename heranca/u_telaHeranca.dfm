@@ -4,7 +4,7 @@ object frm_telaHeranca: Tfrm_telaHeranca
   BorderStyle = bsDialog
   Caption = 'Titulo'
   ClientHeight = 514
-  ClientWidth = 831
+  ClientWidth = 723
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,20 +21,23 @@ object frm_telaHeranca: Tfrm_telaHeranca
   object pgc_principal: TPageControl
     Left = 0
     Top = 0
-    Width = 831
+    Width = 723
     Height = 476
     ActivePage = tbs_listagem
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 831
     object tbs_listagem: TTabSheet
       Caption = 'Listagem'
+      ExplicitWidth = 823
       object pnl_topo: TPanel
         Left = 0
         Top = 0
-        Width = 823
+        Width = 715
         Height = 50
         Align = alTop
         TabOrder = 0
+        ExplicitWidth = 823
         object lbl_indice: TLabel
           Left = 7
           Top = 2
@@ -65,7 +68,7 @@ object frm_telaHeranca: Tfrm_telaHeranca
       object grd_listagem: TDBGrid
         Left = 0
         Top = 50
-        Width = 823
+        Width = 715
         Height = 398
         Align = alClient
         DataSource = bit
@@ -83,15 +86,20 @@ object frm_telaHeranca: Tfrm_telaHeranca
     object tbs_manutencao: TTabSheet
       Caption = 'Manuten'#231#227'o'
       ImageIndex = 1
+      ExplicitWidth = 823
     end
   end
   object pnl_rodape: TPanel
     Left = 0
     Top = 476
-    Width = 831
+    Width = 723
     Height = 38
     Align = alBottom
     TabOrder = 1
+    ExplicitWidth = 831
+    DesignSize = (
+      723
+      38)
     object btn_novo: TBitBtn
       Left = 8
       Top = 6
@@ -289,13 +297,15 @@ object frm_telaHeranca: Tfrm_telaHeranca
       OnClick = btn_apagarClick
     end
     object btn_fechar: TBitBtn
-      Left = 745
+      Left = 638
       Top = 5
       Width = 75
       Height = 25
+      Anchors = [akRight, akBottom]
       Caption = '&Fechar'
       TabOrder = 5
       OnClick = btn_fecharClick
+      ExplicitLeft = 745
     end
     object btn_navigation: TDBNavigator
       Left = 413
@@ -309,13 +319,22 @@ object frm_telaHeranca: Tfrm_telaHeranca
   end
   object qry_listagem: TZQuery
     Connection = dtm_conexao.conexao_db
+    SQL.Strings = (
+      'SELECT'
+      '  nome,endereco,'
+      '  cidade,bairro,'
+      '  estado,cep,'
+      '  telefone,email,'
+      '  dataNascimento,numero'
+      'from'
+      '  clientes;')
     Params = <>
-    Left = 768
+    Left = 344
     Top = 24
   end
   object bit: TDataSource
     DataSet = qry_listagem
-    Left = 800
+    Left = 384
     Top = 24
   end
 end

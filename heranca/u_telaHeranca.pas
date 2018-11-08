@@ -65,6 +65,14 @@ implementation
 
 {$R *.dfm}
 
+{$REGION 'IMPORTANTE'}
+{
+  tags:
+    1 - limpar input;
+    2 - id;
+}
+{$ENDREGION}
+
 {$region 'PROCEDURES E FUNCTIONS'}
 procedure Tfrm_telaHeranca.ControlarBotoes(flag: boolean);
 begin
