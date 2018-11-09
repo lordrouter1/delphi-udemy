@@ -144,7 +144,6 @@ end;
 
 destructor TCategoria.Destroy;
 begin
-  ShowMessage('Destruido!');
   inherited;
 end;
 {$ENDREGION}

@@ -1,0 +1,177 @@
+unit u_cad_cliente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, u_telaHeranca, Data.DB,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, Vcl.DBCtrls, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Vcl.ExtCtrls, Vcl.ComCtrls,
+  RxToolEdit, u_enum, u_cCliente, u_dtm_conexao;
+
+type
+  Tfrm_cad_cliente = class(Tfrm_telaHeranca)
+    edt_codigo: TLabeledEdit;
+    edt_nome: TLabeledEdit;
+    msk_cep: TMaskEdit;
+    lbl_cep: TLabel;
+    edt_endereco: TLabeledEdit;
+    edt_numero: TLabeledEdit;
+    edt_cidade: TLabeledEdit;
+    edt_estado: TLabeledEdit;
+    edt_email: TLabeledEdit;
+    Label1: TLabel;
+    lbl_telefone: TLabel;
+    dt_data: TDateEdit;
+    lbl_data: TLabel;
+    edt_bairro: TLabeledEdit;
+    msk_telefone: TMaskEdit;
+    qry_listagemnome: TWideStringField;
+    qry_listagemendereco: TWideStringField;
+    qry_listagemcidade: TWideStringField;
+    qry_listagembairro: TWideStringField;
+    qry_listagemestado: TWideStringField;
+    qry_listagemcep: TWideStringField;
+    qry_listagemtelefone: TWideStringField;
+    qry_listagememail: TWideStringField;
+    qry_listagemdataNascimento: TDateTimeField;
+    qry_listagemnumero: TIntegerField;
+    qry_listagemid: TIntegerField;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn_alterarClick(Sender: TObject);
+    procedure grd_listagemDblClick(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+    oCliente : TCliente;
+    function excluir:Boolean; override;
+    function gravar(EstadoCadastro:TEnum):Boolean; override;
+    procedure enables(status: boolean);
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_cad_cliente: Tfrm_cad_cliente;
+
+implementation
+
+{$R *.dfm}
+
+{$REGION 'OVERRIDE'}
+procedure Tfrm_cad_cliente.btn_alterarClick(Sender: TObject);
+begin
+  inherited;
+  if oCliente.selecionar(qry_listagem.FieldByName('id').AsInteger) then
+  begin
+    edt_codigo.Text := IntToStr(oCliente.codigo);
+    edt_nome.Text:= oCliente.nome;
+    msk_cep.Text:= oCliente.cep;
+    edt_endereco.Text:= oCliente.endereco;
+    edt_numero.Text:= oCliente.numero;
+    edt_cidade.Text:= oCliente.cidade;
+    edt_estado.Text:= oCliente.estado;
+    edt_email.Text:= oCliente.email;
+    dt_data.Text:= oCliente.dataNascimento;
+    edt_bairro.Text:= oCliente.bairro;
+    msk_telefone.Text:= oCliente.telefone;
+
+    enables(false);
+  end
+  else
+  begin
+    btn_cancelar.Click;
+    abort;
+  end;
+end;
+
+function Tfrm_cad_cliente.excluir: Boolean;
+begin
+  result := oCliente.apagar(qry_listagem.FieldByName('id').AsInteger,qry_listagem.FieldByName('nome').AsString);
+end;
+
+function Tfrm_cad_cliente.gravar(EstadoCadastro: TEnum): Boolean;
+begin
+  if (edt_codigo.Text <> '') then
+    oCliente.codigo := StrToInt(edt_codigo.Text)
+  else
+    oCliente.codigo := 0;
+
+  oCliente.nome := edt_nome.Text;
+  oCliente.endereco := edt_endereco.Text;
+  oCliente.cidade := edt_cidade.Text;
+  oCliente.bairro := edt_bairro.Text;
+  oCliente.estado := edt_estado.Text;
+  oCliente.cep := msk_cep.Text;
+  oCliente.telefone := msk_telefone.Text;
+  oCliente.email := edt_email.Text;
+  oCliente.dataNascimento := dt_data.Text;
+  oCliente.numero := edt_numero.Text;
+
+  if (sysStatus=te_inserir) then
+    result := oCliente.inserir
+  else if (sysStatus=te_alterar) then
+    result := oCliente.atualizar;
+end;
+{$ENDREGION}
+
+{$REGION 'FUNCOES E PROCEDURES'}
+
+procedure Tfrm_cad_cliente.enables(status: boolean);
+begin
+  if not(status) then begin
+    edt_codigo.Enabled := false;
+    edt_nome.Enabled := false;
+    msk_cep.Enabled := false;
+    edt_endereco.Enabled := false;
+    edt_numero.Enabled := false;
+    edt_cidade.Enabled := false;
+    edt_estado.Enabled := false;
+    edt_email.Enabled := false;
+    dt_data.Enabled := false;
+    edt_bairro.Enabled := false;
+    msk_telefone.Enabled := false;
+  end
+  else
+  begin
+    edt_codigo.Enabled := false;
+    edt_nome.Enabled := true;
+    msk_cep.Enabled := true;
+    edt_endereco.Enabled := true;
+    edt_numero.Enabled := true;
+    edt_cidade.Enabled := true;
+    edt_estado.Enabled := true;
+    edt_email.Enabled := true;
+    dt_data.Enabled := true;
+    edt_bairro.Enabled := true;
+    msk_telefone.Enabled := true;
+  end;
+end;
+{$ENDREGION}
+procedure Tfrm_cad_cliente.grd_listagemDblClick(Sender: TObject);
+begin
+  inherited;
+  enables(false);
+end;
+
+procedure Tfrm_cad_cliente.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  if Assigned(oCliente) then
+    FreeAndNil(oCliente);
+end;
+
+procedure Tfrm_cad_cliente.FormCreate(Sender: TObject);
+begin
+  inherited;
+  oCliente := TCliente.Create(dtm_conexao.conexao_db);
+  indiceAtual := 'nome';
+end;
+
+procedure Tfrm_cad_cliente.btn_cancelarClick(Sender: TObject);
+begin
+  inherited;
+  enables(true);
+end;
+end.

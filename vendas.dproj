@@ -122,6 +122,10 @@
         <DCCReference Include="u_enum.pas"/>
         <DCCReference Include="class\u_cCategoria.pas"/>
         <DCCReference Include="class\u_cCliente.pas"/>
+        <DCCReference Include="cadastro\u_cad_cliente.pas">
+            <Form>frm_cad_cliente</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -145,6 +149,54 @@
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Comum.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Comum.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_OpenSSL.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_OpenSSL.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Diversos.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Diversos.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Serial.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Serial.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Convenio115.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Convenio115.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_LFD.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_LFD.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_PAF.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_PAF.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SEF2.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SEF2.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Sintegra.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Sintegra.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SPED.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SPED.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SPEDImportar.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SPEDImportar.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_DeSTDA.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_DeSTDA.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Ponto.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Ponto.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_TCP.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_TCP.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Boleto.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Boleto.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_MTER.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_MTER.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Integrador.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Integrador.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFe.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFe.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFCeECFVirtual.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFCeECFVirtual.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFeDanfeESCPOS.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFeDanfeESCPOS.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_CTe.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_CTe.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFSe.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFSe.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_MDFe.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_MDFe.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_GNRE.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_GNRE.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBre_Social.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBre_Social.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Reinf.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_Reinf.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SAT.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SAT.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SATECFVirtual.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SATECFVirtual.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SATExtratoESCPOS.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SATExtratoESCPOS.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SATWS.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SATWS.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_BlocoX.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_BlocoX.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_BPe.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_BPe.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_BPeDabpeESCPOS.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_BPeDabpeESCPOS.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_ANe.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_ANe.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_TEFD.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_TEFD.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFeDanfeFR.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFeDanfeFR.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_CTeDacteFR.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_CTeDacteFR.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFSeDanfseFR.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFSeDanfseFR.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_BoletoFR.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_BoletoFR.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_MDFeDamdfeFR.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_MDFeDamdfeFR.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_GNREGuiaFR.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_GNREGuiaFR.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFeDanfeRL.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFeDanfeRL.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFSeDanfseRL.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_NFSeDanfseRL.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_CTeDacteRL.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_CTeDacteRL.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_BoletoRL.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_BoletoRL.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_MDFeDamdfeRL.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_MDFeDamdfeRL.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SATExtratoRL.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_SATExtratoRL.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_GNREGuiaRL.bpl">File C:\Users\suporte\acbr\Lib\Delphi\LibD25\ACBr_GNREGuiaRL.bpl not found</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">

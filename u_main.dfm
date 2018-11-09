@@ -27,6 +27,7 @@ object frm_main: Tfrm_main
       Caption = 'Cadastro'
       object Cliente1: TMenuItem
         Caption = 'Cliente'
+        OnClick = Cliente1Click
       end
       object N1: TMenuItem
         Caption = '-'

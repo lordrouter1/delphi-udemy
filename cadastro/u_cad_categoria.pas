@@ -69,7 +69,6 @@ begin
     result := oCategoria.inserir
   else if (sysStatus=te_alterar) then
     result := oCategoria.atualizar;
-
 end;
 {$ENDREGION}
 

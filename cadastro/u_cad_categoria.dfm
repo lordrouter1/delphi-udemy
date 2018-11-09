@@ -1,6 +1,5 @@
 inherited frm_cad_categoria: Tfrm_cad_categoria
   Caption = 'Cadastro de Categoria'
-  ExplicitTop = 8
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgc_principal: TPageControl

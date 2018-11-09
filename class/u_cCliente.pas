@@ -72,22 +72,144 @@ implementation
 
 {$REGION 'CRUD'}
 function TCliente.apagar(id: integer; descricao: string): Boolean;
+var
+  qry:TZQuery;
 begin
+  if MessageDlg('Apagar registro: '+IntToStr(id)+#13+'Nome: '+descricao,mtConfirmation,[mbYes,mbNo],0) = mrNo then
+  begin
+    result := false;
+    abort;
+  end;
 
+  try
+    result:= true;
+    qry := TZQuery.Create(nil);
+    qry.Connection := conexaoDb;
+    qry.SQL.Clear;
+    qry.SQL.Add('delete from clientes where id=:id');
+    qry.ParamByName('id').Value := id;
+
+    try
+      qry.ExecSQL;
+    except
+      result := false;
+    end;
+  finally
+    if(Assigned(qry)) then
+      FreeAndNil(qry);
+  end;
 end;
 
 function TCliente.atualizar: Boolean;
+var
+  qry:TZQuery;
 begin
+  try
+    result:= true;
+    qry := TZQuery.Create(nil);
+    qry.Connection := conexaoDb;
+    qry.SQL.Clear;
+    qry.SQL.Add('update clientes set '+
+                'numero=:numero '+
+                'endereco=:endereco '+
+                'cidade=:cidade '+
+                'bairro=:bairro '+
+                'estado=:estado '+
+                'cep=:cep '+
+                'telefone=:telefone '+
+                'email=:email '+
+                'dataNascimento=:dataNascimento '+
+                'numero=:numero '+
+                'where id=:id');
+    qry.ParamByName('id').Value := self.f_id;
+    qry.ParamByName('numero').Value := self.f_numero;
+    qry.ParamByName('endereco').Value := self.f_endereco;
+    qry.ParamByName('cidade').Value := self.f_cidade;
+    qry.ParamByName('bairro').Value := self.f_bairro;
+    qry.ParamByName('estado').Value := self.f_estado;
+    qry.ParamByName('cep').Value := self.f_cep;
+    qry.ParamByName('telefone').Value := self.f_telefone;
+    qry.ParamByName('email').Value := self.f_email;
+    qry.ParamByName('dataNascimento').Value := self.f_dataNascimento;
+    qry.ParamByName('numero').Value := self.f_numero;
 
+    try
+      qry.ExecSQL;
+    except
+      result := false;
+    end;
+  finally
+    if(Assigned(qry)) then
+      FreeAndNil(qry);
+  end;
 end;
 
 function TCliente.selecionar(id: integer): Boolean;
+var
+  qry:TZQuery;
 begin
+  try
+    result:= true;
+    qry := TZQuery.Create(nil);
+    qry.Connection := conexaoDb;
+    qry.SQL.Clear;
+    qry.SQL.Add('select * from clientes where id = :id;');
+    qry.ParamByName('id').Value := id;
+    try
+      qry.Open;
 
+      self.f_id := id;
+      self.f_nome := qry.FieldByName('nome').AsString;
+      self.f_endereco := qry.FieldByName('endereco').AsString;
+      self.f_cidade := qry.FieldByName('cidade').AsString;
+      self.f_bairro := qry.FieldByName('bairro').AsString;
+      self.f_estado := qry.FieldByName('estado').AsString;
+      self.f_cep := qry.FieldByName('cep').AsString;
+      self.f_telefone := qry.FieldByName('telefone').AsString;
+      self.f_email := qry.FieldByName('email').AsString;
+      self.f_dataNascimento := qry.FieldByName('dataNascimento').AsString;
+      self.f_numero := qry.FieldByName('numero').AsString;
+    except
+      result := false;
+    end;
+  finally
+    if(Assigned(qry)) then
+      FreeAndNil(qry);
+  end;
 end;
 
 function TCliente.inserir: Boolean;
+var
+  qry:TZQuery;
 begin
+  try
+    result:= true;
+    qry := TZQuery.Create(nil);
+    qry.Connection := conexaoDb;
+    qry.SQL.Clear;
+    qry.SQL.Add('insert into clientes '+
+                '(numero,endereco,cidade,bairro,estado,cep,telefone,email,dataNascimento,nome) '+
+                'values(:numero,:endereco,:cidade,:bairro,:estado,:cep,:telefone,:email,:dataNascimento,:nome);');
+    qry.ParamByName('nome').Value := self.f_nome;
+    qry.ParamByName('endereco').Value := self.f_endereco;
+    qry.ParamByName('cidade').Value := self.f_cidade;
+    qry.ParamByName('bairro').Value := self.f_bairro;
+    qry.ParamByName('estado').Value := self.f_estado;
+    qry.ParamByName('cep').Value := self.f_cep;
+    qry.ParamByName('telefone').Value := self.f_telefone;
+    qry.ParamByName('email').Value := self.f_email;
+    qry.ParamByName('dataNascimento').Value := self.f_dataNascimento;
+    qry.ParamByName('numero').Value := self.f_numero;
+
+    try
+      qry.ExecSQL;
+    except
+      result := false;
+    end;
+  finally
+    if(Assigned(qry)) then
+      FreeAndNil(qry);
+  end;
 
 end;
 {$ENDREGION}
@@ -95,12 +217,11 @@ end;
 {$REGION 'CONSTRUCT AND DESTRUCT'}
 constructor TCliente.Create(aConexao: TZConnection);
 begin
-
+  ConexaoDb := aConexao;
 end;
 
 destructor TCliente.Destroy;
 begin
-
   inherited;
 end;
 {$ENDREGION}

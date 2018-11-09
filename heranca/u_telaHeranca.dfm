@@ -26,10 +26,8 @@ object frm_telaHeranca: Tfrm_telaHeranca
     ActivePage = tbs_listagem
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 831
     object tbs_listagem: TTabSheet
       Caption = 'Listagem'
-      ExplicitWidth = 823
       object pnl_topo: TPanel
         Left = 0
         Top = 0
@@ -37,7 +35,6 @@ object frm_telaHeranca: Tfrm_telaHeranca
         Height = 50
         Align = alTop
         TabOrder = 0
-        ExplicitWidth = 823
         object lbl_indice: TLabel
           Left = 7
           Top = 2
@@ -86,7 +83,6 @@ object frm_telaHeranca: Tfrm_telaHeranca
     object tbs_manutencao: TTabSheet
       Caption = 'Manuten'#231#227'o'
       ImageIndex = 1
-      ExplicitWidth = 823
     end
   end
   object pnl_rodape: TPanel
@@ -96,7 +92,6 @@ object frm_telaHeranca: Tfrm_telaHeranca
     Height = 38
     Align = alBottom
     TabOrder = 1
-    ExplicitWidth = 831
     DesignSize = (
       723
       38)
@@ -305,7 +300,6 @@ object frm_telaHeranca: Tfrm_telaHeranca
       Caption = '&Fechar'
       TabOrder = 5
       OnClick = btn_fecharClick
-      ExplicitLeft = 745
     end
     object btn_navigation: TDBNavigator
       Left = 413

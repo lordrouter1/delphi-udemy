@@ -150,6 +150,9 @@ begin
     if (Components[i] is TLabeledEdit) then begin
       TLabeledEdit(Components[i]).Text := '';
     end;
+    if(Components[i] is TMaskEdit) then begin
+        TMaskEdit(Components[i]).Text  := '';
+      end;
   end;
 end;
 {$endregion}

@@ -3,8 +3,11 @@ unit u_main;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, u_dtm_conexao;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, u_dtm_conexao,
+  VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.Series, Vcl.ExtCtrls,
+  VCLTee.TeeProcs, VCLTee.Chart;
 
 type
   Tfrm_main = class(TForm)
@@ -27,6 +30,7 @@ type
     procedure Fechar1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Categoria1Click(Sender: TObject);
+    procedure Cliente1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,13 +44,20 @@ implementation
 
 {$R *.dfm}
 
-uses u_cad_categoria;
+uses u_cad_categoria, u_cad_cliente;
 
 procedure Tfrm_main.Categoria1Click(Sender: TObject);
 begin
   frm_cad_categoria := tfrm_cad_categoria.create(self);
   frm_cad_categoria.showmodal;
   frm_cad_categoria.release;
+end;
+
+procedure Tfrm_main.Cliente1Click(Sender: TObject);
+begin
+  frm_cad_cliente := tfrm_cad_cliente.Create(self);
+  frm_cad_cliente.showmodal;
+  frm_cad_cliente.release;
 end;
 
 procedure Tfrm_main.Fechar1Click(Sender: TObject);
